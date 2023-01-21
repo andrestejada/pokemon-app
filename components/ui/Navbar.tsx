@@ -22,19 +22,21 @@ export const Navbar = () => {
         height={70}
       />
 
-      <NextLink href='/' passHref  style={{display:'flex'}}>
-          <Text color='white' h2>
-            P
-          </Text>
-          <Text color='white' h3>
-            okémon
-          </Text>
+      <NextLink href='/' passHref style={{ display: 'flex' }}>
+        <Text color='white' h2>
+          P
+        </Text>
+        <Text color='white' h3>
+          okémon
+        </Text>
       </NextLink>
 
       <Spacer css={{ flex: 1 }} />
 
       <NextLink href='/favorites' passHref>
-        <Text color='white'>Favoritos</Text>
+        <Text color='white' css={{ marginRight: '10px' }} >
+          Favoritos
+        </Text>
       </NextLink>
     </div>
   )
