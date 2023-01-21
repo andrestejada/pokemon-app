@@ -115,23 +115,25 @@ import {
   localFavorites
 } from '../../utils/localFavorites'
 import confetti from 'canvas-confetti'
+import { PokemonListResponse } from '../../interfaces/pokemon-list'
 import { getPokemonInfo } from '../../utils/getPokemonInfo'
 
 export const getStaticPaths: GetStaticPaths = async ctx => {
-  const pokemons151 = [...Array(151)].map((id, i) => `${i + 1}`)
+  const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151')
+  const pokemonNames: string[] = data.results.map(pokemon => pokemon.name)
   return {
-    paths: pokemons151.map(id => ({
-      params: { id }
+    paths: pokemonNames.map(name => ({
+      params: { name }
     })),
     fallback: false
   }
 }
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params as { id: string }
+  const { name } = params as { name: string }
 
   return {
     props: {
-      pokemon: await getPokemonInfo(id)
+      pokemon: await getPokemonInfo(name)
     }
   }
 }
